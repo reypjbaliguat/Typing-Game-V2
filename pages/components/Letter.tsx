@@ -15,9 +15,9 @@ export default function Letter({
 }: LetterProps) {
   return (
     <span
-      className={`text-4xl inline  ${
+      className={`text-4xl inline text-white ${
         textValue && letterArr && textValue[index] === letter
-          ? "text-white"
+          ? "text-green-300"
           : textValue && textValue[index] !== letter && textValue.length > index
           ? "text-red-600"
           : ""

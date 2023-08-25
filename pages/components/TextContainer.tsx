@@ -16,7 +16,7 @@ const TextContainer = ({
 }: TextContainerProps) => {
   return (
     <div
-      className="flex sm:basis-3/5 sm:my-10 my-5  sm:p-16 p-5 rounded-md dark:bg-darkprimary bg-primary"
+      className="flex sm:basis-3/5 sm:my-10 my-5 border border-gray-200 sm:p-16 p-5 rounded-md dark:bg-darkprimary bg-primary"
       data-testid="text-container"
     >
       {status === "loading" ? (

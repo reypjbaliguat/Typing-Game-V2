@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useLoginViaSocialMutation } from "../store/slices/auth";
 import { SET_USER } from "../store/slices/authSlice";
-import { User } from "@/types/user";
+import { User } from "@/types";
 import Icon from "@mdi/react";
 import { mdiFacebook, mdiGoogle } from "@mdi/js";
 import { IconButton } from "@mui/material";

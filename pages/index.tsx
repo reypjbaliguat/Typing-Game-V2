@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from "react";
 import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
+import { fetchWords } from "./store/slices/word";
 
 export default function Home() {
   // Ref
@@ -96,6 +97,9 @@ export default function Home() {
   useEffect(() => {
     setComponentTextValue("");
   }, [content]);
+  const fetcher = fetchWords();
+  console.log(fetcher);
+
   useEffect(() => {
     return () => {
       dispatch(reset());

@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getSession } from "next-auth/react";
 
-export const api = createApi({
-  reducerPath: "api",
+export const api = {
+  reducerPath: "createApiapi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/`,
     prepareHeaders: async (headers) => {
@@ -13,5 +13,5 @@ export const api = createApi({
     },
   }),
   endpoints: () => ({}),
-  tagTypes: ["Score", "User"],
-});
+  tagTypes: ["Score", "User", "Word"],
+};
