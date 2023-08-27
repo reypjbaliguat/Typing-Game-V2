@@ -20,7 +20,7 @@ export default function TextInput({
     <textarea
       ref={textAreaRef}
       placeholder="Type here ..."
-      className="w-full p-10 rounded-md border-primary border text-black bg-white "
+      className="w-full p-5 rounded-md border-primary border text-black bg-white "
       value={componentTextValue}
       disabled={!playing}
       onChange={(e) => {

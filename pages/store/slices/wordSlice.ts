@@ -1,8 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import fetchUtil from "@/pages/utilities/fetchUtil";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface word {
-  status: String;
   content: String;
   value: String;
   gameOver: Boolean;
@@ -19,7 +17,6 @@ export interface WordState {
 // Initial state
 const initialState: WordState = {
   word: {
-    status: "",
     content: "",
     value: "",
     gameOver: false,
@@ -28,10 +25,6 @@ const initialState: WordState = {
     wordsPerMinute: 0,
   },
 };
-
-export const fetchWord = createAsyncThunk("word/fetchWord", async () => {
-  return fetchUtil("https://api.quotable.io/random");
-});
 
 // Actual Slice
 export const wordSlice = createSlice({
@@ -62,21 +55,6 @@ export const wordSlice = createSlice({
     reset: (state) => {
       Object.assign(state, initialState);
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchWord.pending, (state) => {
-        state.word.status = "loading";
-        // both `state` and `action` are now correctly typed
-        // based on the slice state and the `pending` action creator
-      })
-      .addCase(fetchWord.fulfilled, (state, { payload }) => {
-        state.word.content = payload.content;
-        state.word.status = "loaded";
-      })
-      .addCase(fetchWord.rejected, (state) => {
-        state.word.status = "failed";
-      });
   },
 });
 

@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
-import Button from "@mui/material/Button";
+import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 
 interface PlayButtonProps {
   handlePlay: () => void;
   fetchNewContent: () => void;
   playing: Boolean;
   time: number;
+  loading: boolean;
 }
 
 export default function PlayButton({
@@ -15,16 +17,26 @@ export default function PlayButton({
   fetchNewContent,
   playing,
   time,
+  loading,
 }: PlayButtonProps) {
   return (
     <div className="flex justify-center gap-2 mt-5">
       {!playing && (
-        <Button variant="contained" onClick={fetchNewContent}>
+        <LoadingButton
+          loading={loading}
+          variant="contained"
+          onClick={fetchNewContent}
+          className="bg-primary dark:bg-darkprimary"
+        >
           New Content
-        </Button>
+        </LoadingButton>
       )}
       {!playing && (
-        <Button variant="contained" onClick={handlePlay}>
+        <Button
+          className="bg-primary dark:bg-darkprimary"
+          variant="contained"
+          onClick={handlePlay}
+        >
           Play
         </Button>
       )}

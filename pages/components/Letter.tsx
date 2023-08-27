@@ -13,6 +13,8 @@ export default function Letter({
   index,
   letter,
 }: LetterProps) {
+  console.log(textValue[index]);
+  console.log(letter);
   return (
     <span
       className={`text-4xl inline text-white ${

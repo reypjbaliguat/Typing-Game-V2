@@ -9,9 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/pages/store";
 import {
   addSecondToTime,
-  fetchWord,
+  // fetchWord,
   reset,
   resetTime,
+  setContent,
   setGameOver,
   setPlaying,
   setValue,
@@ -21,17 +22,21 @@ import { useEffect, useRef, useState } from "react";
 import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
-import { fetchWords } from "./store/slices/word";
+import { useGetWordsQuery } from "./store/slices/word";
 
 export default function Home() {
+  // wordApi
+  const { data, isLoading, refetch, isFetching } = useGetWordsQuery("");
+
   // Ref
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
   // Component States
   const [componentTextValue, setComponentTextValue] = useState("");
+
   // Redux
   const { word } = useSelector((state: RootState) => state.word);
-  const { wordsPerMinute, status, content, value, time, gameOver, playing } =
-    word;
+  const { wordsPerMinute, content, value, time, gameOver, playing } = word;
   const dispatch = useDispatch<AppDispatch>();
 
   // Component Constants
@@ -42,17 +47,19 @@ export default function Home() {
   const calculateResult = () => {
     let result;
     const averageLetterPerWord = 4.7;
-    const wordCount = content.length / averageLetterPerWord;
+    const wordCount = content && content.length / averageLetterPerWord;
     if (letterArr && textValue && letterArr.join("") === textValue.join("")) {
       result = Math.round((wordCount / time) * 60);
       dispatch(setWordPerMinute(result));
+
       dispatch(setGameOver(true));
       dispatch(setPlaying(false));
     }
   };
+
   const refetchOnFinish = () => {
     if (letterArr && textValue && letterArr.join("") === textValue.join("")) {
-      dispatch(fetchWord());
+      refetch();
     }
   };
 
@@ -61,7 +68,7 @@ export default function Home() {
   };
 
   const fetchNewContent = async () => {
-    dispatch(fetchWord());
+    refetch();
   };
 
   // useEffects
@@ -74,41 +81,37 @@ export default function Home() {
   }, [gameOver, playing]);
 
   useEffect(() => {
-    const promise = dispatch(fetchWord());
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(setValue(componentTextValue));
   }, [componentTextValue, dispatch]);
+
   useEffect(() => {
     if (playing) {
       textAreaRef.current?.focus();
       dispatch(setWordPerMinute(0));
       dispatch(resetTime());
       const id = setInterval(() => dispatch(addSecondToTime()), 1000);
-
       return () => {
         clearInterval(id);
       };
     }
   }, [playing, dispatch]);
+
   useEffect(() => {
     setComponentTextValue("");
   }, [content]);
-  const fetcher = fetchWords();
-  console.log(fetcher);
 
   useEffect(() => {
     return () => {
       dispatch(reset());
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(setContent(data && data.content));
+  }, [data]);
   return (
     <main className="flex basis-full justify-center h-screen bg-primarywhite flex-col ">
       <Navbar />
-
       <div className="flex basis-full h-[90vh] gap-5 px-5">
         <div className="basis-1/5 flex-wrap">
           <LeaderBoard />
@@ -117,7 +120,7 @@ export default function Home() {
           <Header />
           <Result wordsPerMinute={wordsPerMinute} />
           <TextContainer
-            status={status}
+            loading={isLoading || isFetching}
             textValue={textValue}
             letterArr={letterArr}
           />
@@ -132,6 +135,7 @@ export default function Home() {
             handlePlay={handlePlay}
             fetchNewContent={fetchNewContent}
             playing={playing}
+            loading={isLoading || isFetching}
             time={time}
           />
         </div>

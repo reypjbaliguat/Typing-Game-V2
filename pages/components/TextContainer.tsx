@@ -5,21 +5,21 @@ import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
 interface TextContainerProps {
-  status: String;
+  loading: boolean;
   textValue: string[];
   letterArr: string[];
 }
 const TextContainer = ({
-  status,
+  loading,
   textValue,
   letterArr,
 }: TextContainerProps) => {
   return (
     <div
-      className="flex sm:basis-3/5 sm:my-10 my-5 border border-gray-200 sm:p-16 p-5 rounded-md dark:bg-darkprimary bg-primary"
+      className="flex sm:basis-3/5 sm:my-10 my-5 border border-gray-200 sm:p-10 p-5 rounded-md dark:bg-darkprimary bg-primary"
       data-testid="text-container"
     >
-      {status === "loading" ? (
+      {loading ? (
         <Icon
           path={mdiLoading}
           size={4}

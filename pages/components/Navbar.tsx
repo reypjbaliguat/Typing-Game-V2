@@ -14,7 +14,6 @@ function Navbar() {
   // theme
   const { theme, setTheme } = useTheme();
   const session = useSession();
-  console.log(session);
 
   return (
     <div className="flex basis-full justify-center items-center max-h-[10vh]">

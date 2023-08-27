@@ -45,4 +45,4 @@ const persistor = persistStore(store);
 export default storage;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export { store, persistor };
+export { persistor, store };
