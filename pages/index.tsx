@@ -51,9 +51,10 @@ export default function Home() {
     if (letterArr && textValue && letterArr.join("") === textValue.join("")) {
       result = Math.round((wordCount / time) * 60);
       dispatch(setWordPerMinute(result));
-
       dispatch(setGameOver(true));
       dispatch(setPlaying(false));
+      // createScore
+      
     }
   };
 

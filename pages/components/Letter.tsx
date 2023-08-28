@@ -13,16 +13,14 @@ export default function Letter({
   index,
   letter,
 }: LetterProps) {
-  console.log(textValue[index]);
-  console.log(letter);
   return (
     <span
-      className={`text-4xl inline text-white ${
+      className={`text-4xl inline  ${
         textValue && letterArr && textValue[index] === letter
-          ? "text-green-300"
+          ? "text-green-400"
           : textValue && textValue[index] !== letter && textValue.length > index
           ? "text-red-600"
-          : ""
+          : "text-white"
       }`}
       data-testid="letter"
     >

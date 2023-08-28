@@ -29,12 +29,12 @@ export default function Login() {
       image,
     };
     const userData = (await loginViaSocial({ body })) as UserDataProps;
-
     const newData = {
       id: userData.data.id,
       email: userData.data.email,
       name: userData.data.name,
       image: userData.data.image,
+      token: userData.data.token,
     };
     dispatch(SET_USER({ user: newData }));
   };
