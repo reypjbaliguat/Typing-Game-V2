@@ -23,6 +23,8 @@ import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
 import { useGetWordsQuery } from "./store/slices/word";
+import { useCreateScoreMutation } from "./store/slices/score";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   // wordApi
@@ -34,15 +36,20 @@ export default function Home() {
   // Component States
   const [componentTextValue, setComponentTextValue] = useState("");
 
+  // session
+  const session = useSession() as any;
+
   // Redux
   const { word } = useSelector((state: RootState) => state.word);
+  const auth = useSelector((state: RootState) => state.auth);
   const { wordsPerMinute, content, value, time, gameOver, playing } = word;
+  const [createScore] = useCreateScoreMutation();
+  console.log(auth);
   const dispatch = useDispatch<AppDispatch>();
 
   // Component Constants
   const textValue = value && value.split("");
   const letterArr = content && content.split("").splice(0, 100);
-
   // Component Functions
   const calculateResult = () => {
     let result;
@@ -54,7 +61,17 @@ export default function Home() {
       dispatch(setGameOver(true));
       dispatch(setPlaying(false));
       // createScore
-      
+      if (session.status === "authenticated") {
+        const body = {
+          email: auth.user.email,
+          speed: result,
+          user_id: auth.user.id,
+        };
+        createScore({ body })
+          .unwrap()
+          .then((data) => console.log({ data }))
+          .catch((e) => console.log(e));
+      }
     }
   };
 

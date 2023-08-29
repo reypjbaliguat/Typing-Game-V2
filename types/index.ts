@@ -8,5 +8,6 @@ export interface User {
 
 export interface Score {
   user_id: string;
-  speed: string;
+  speed: number;
+  email: string;
 }

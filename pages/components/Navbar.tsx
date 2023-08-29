@@ -1,6 +1,4 @@
 import React from "react";
-import Icon from "@mdi/react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import {
   mdiFacebook,
@@ -9,11 +7,51 @@ import {
   mdiWhiteBalanceSunny,
 } from "@mdi/js";
 import { Button, IconButton } from "@mui/material";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useLoginViaSocialMutation } from "../store/slices/auth";
+import { SET_USER } from "../store/slices/authSlice";
+import { User } from "@/types";
+import Icon from "@mdi/react";
+
+interface UserDataProps {
+  data: User;
+}
 
 function Navbar() {
   // theme
   const { theme, setTheme } = useTheme();
-  const session = useSession();
+  const session = useSession() as any;
+  const dispatch = useAppDispatch();
+  const [loginViaSocial] = useLoginViaSocialMutation();
+
+  const createOrLoginSocialUser = async () => {
+    const { data } = session;
+    const { user } = data;
+    const { email, image, name } = user;
+    const body = {
+      email,
+      name,
+      image,
+    };
+    const userData = (await loginViaSocial({ body })) as UserDataProps;
+    const newData = {
+      id: userData.data.id,
+      email: userData.data.email,
+      name: userData.data.name,
+      image: userData.data.image,
+      token: userData.data.token,
+    };
+    dispatch(SET_USER({ user: newData }));
+  };
+
+  const auth = useAppSelector((state) => state.auth);
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      createOrLoginSocialUser();
+    }
+  }, [session]);
 
   return (
     <div className="flex basis-full justify-center items-center max-h-[10vh]">

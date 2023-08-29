@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login";
+import LeaderBoardData from "./LeaderBoardData";
 export default function LeaderBoard() {
   return (
     <>
@@ -8,8 +8,8 @@ export default function LeaderBoard() {
           Leader Board
         </p>
       </div>
-      <div className="flex basis-full justify-center items-center border border-gray-200 rounded-b-md border-t-0 h-5/6">
-        <Login />
+      <div className="flex basis-full justify-center  p-5 border border-gray-200 rounded-b-md border-t-0 h-5/6">
+        <LeaderBoardData />
       </div>
     </>
   );

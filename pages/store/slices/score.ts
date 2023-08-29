@@ -20,4 +20,4 @@ export const scoreApi = api.injectEndpoints({
   }),
 });
 
-export const { useCreateScoreMutation } = scoreApi;
+export const { useCreateScoreMutation, useGetScoresQuery } = scoreApi;
