@@ -8,6 +8,7 @@ export const scoreApi = api.injectEndpoints({
       query: () => ({
         url: `${API_PATH}/`,
       }),
+      providesTags: ["Score"],
     }),
     createScore: builder.mutation<Score, { body: Partial<Score> }>({
       query: ({ body }: { body: Score }) => ({

@@ -1,8 +1,8 @@
 import React from "react";
 
 interface LetterProps {
-  letterArr: string[];
-  textValue: string[];
+  letterArr: string[] | "";
+  textValue: string[] | "";
   index: number;
   letter: string;
 }

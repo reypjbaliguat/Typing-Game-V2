@@ -33,56 +33,47 @@ export default function Home() {
   // Ref
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Component States
-  const [componentTextValue, setComponentTextValue] = useState("");
-
   // session
   const session = useSession() as any;
 
   // Redux
   const { word } = useSelector((state: RootState) => state.word);
   const auth = useSelector((state: RootState) => state.auth);
-  const { wordsPerMinute, content, value, time, gameOver, playing } = word;
+  const { wordsPerMinute, content, value, time, playing, gameOver } = word;
   const [createScore] = useCreateScoreMutation();
-  console.log(auth);
   const dispatch = useDispatch<AppDispatch>();
 
   // Component Constants
   const textValue = value && value.split("");
-  const letterArr = content && content.split("").splice(0, 100);
+  const letterArr = content && content.split("");
   // Component Functions
   const calculateResult = () => {
     let result;
     const averageLetterPerWord = 4.7;
-    const wordCount = content && content.length / averageLetterPerWord;
-    if (letterArr && textValue && letterArr.join("") === textValue.join("")) {
-      result = Math.round((wordCount / time) * 60);
-      dispatch(setWordPerMinute(result));
-      dispatch(setGameOver(true));
-      dispatch(setPlaying(false));
-      // createScore
-      if (session.status === "authenticated") {
-        const body = {
-          email: auth.user.email,
-          speed: result,
-          user_id: auth.user.id,
-        };
-        createScore({ body })
-          .unwrap()
-          .then((data) => console.log({ data }))
-          .catch((e) => console.log(e));
-      }
-    }
-  };
+    const wordCount = Number(content && content.length / averageLetterPerWord);
+    result = Math.round((wordCount / time) * 60);
+    dispatch(setWordPerMinute(result));
+    dispatch(setGameOver(true));
+    dispatch(setPlaying(false));
 
-  const refetchOnFinish = () => {
-    if (letterArr && textValue && letterArr.join("") === textValue.join("")) {
-      refetch();
+    // createScore
+    if (session.status === "authenticated") {
+      const body = {
+        email: auth.user.email,
+        speed: result,
+        user_id: auth.user.id,
+      };
+      createScore({ body })
+        .unwrap()
+        .then((data) => console.log({ data }))
+        .catch((e) => console.log(e));
     }
+    refetch();
   };
 
   const handlePlay = () => {
     dispatch(setPlaying(true));
+    dispatch(setGameOver(false));
   };
 
   const fetchNewContent = async () => {
@@ -90,17 +81,17 @@ export default function Home() {
   };
 
   // useEffects
-  useEffect(() => {
-    calculateResult();
-  }, [value, time, content, textValue, letterArr, dispatch]);
 
   useEffect(() => {
-    refetchOnFinish();
-  }, [gameOver, playing]);
-
-  useEffect(() => {
-    dispatch(setValue(componentTextValue));
-  }, [componentTextValue, dispatch]);
+    if (
+      letterArr &&
+      textValue &&
+      letterArr.join("") === textValue.join("") &&
+      !gameOver
+    ) {
+      calculateResult();
+    }
+  }, [textValue]);
 
   useEffect(() => {
     if (playing) {
@@ -115,14 +106,8 @@ export default function Home() {
   }, [playing, dispatch]);
 
   useEffect(() => {
-    setComponentTextValue("");
+    dispatch(setValue(""));
   }, [content]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(reset());
-    };
-  }, []);
 
   useEffect(() => {
     dispatch(setContent(data && data.content));
@@ -143,8 +128,7 @@ export default function Home() {
             letterArr={letterArr}
           />
           <TextInput
-            componentTextValue={componentTextValue}
-            setComponentTextValue={setComponentTextValue}
+            componentTextValue={value}
             content={content}
             playing={playing}
             textAreaRef={textAreaRef}

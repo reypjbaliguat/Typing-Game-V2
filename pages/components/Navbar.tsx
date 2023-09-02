@@ -43,16 +43,16 @@ function Navbar() {
       image: userData.data.image,
       token: userData.data.token,
     };
+    const stringifiedData = JSON.stringify(newData);
+    localStorage.setItem("user", stringifiedData);
     dispatch(SET_USER({ user: newData }));
   };
 
-  const auth = useAppSelector((state) => state.auth);
   useEffect(() => {
     if (session.status === "authenticated") {
       createOrLoginSocialUser();
     }
   }, [session]);
-
   return (
     <div className="flex basis-full justify-center items-center max-h-[10vh]">
       <IconButton

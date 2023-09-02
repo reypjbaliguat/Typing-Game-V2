@@ -1,21 +1,23 @@
 "use client";
 
 import { Dispatch, RefObject, SetStateAction } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import { setValue } from "../store/slices/wordSlice";
 
 interface TextInputProps {
   componentTextValue: string;
-  setComponentTextValue: Dispatch<SetStateAction<string>>;
-  content: String;
+  content: string;
   playing: Boolean;
   textAreaRef: any;
 }
 
 export default function TextInput({
   componentTextValue,
-  setComponentTextValue,
   playing,
   textAreaRef,
 }: TextInputProps) {
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <textarea
       ref={textAreaRef}
@@ -24,7 +26,7 @@ export default function TextInput({
       value={componentTextValue}
       disabled={!playing}
       onChange={(e) => {
-        setComponentTextValue(e.target.value);
+        dispatch(setValue(e.target.value));
       }}
     />
   );

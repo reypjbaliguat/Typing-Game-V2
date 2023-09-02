@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface word {
-  content: String;
-  value: String;
+  content: string;
+  value: string;
   gameOver: Boolean;
   playing: Boolean;
   time: number;

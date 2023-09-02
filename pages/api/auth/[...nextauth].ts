@@ -14,21 +14,9 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
     }),
   ],
-  callbacks: {
-    async jwt({ token }) {
-      token.userRole = "admin";
-      return token;
-    },
-  },
+  callbacks: {},
 };
 
 export default NextAuth(authOptions);

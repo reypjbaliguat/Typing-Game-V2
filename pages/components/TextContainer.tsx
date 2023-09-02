@@ -6,8 +6,8 @@ import { mdiLoading } from "@mdi/js";
 
 interface TextContainerProps {
   loading: boolean;
-  textValue: string[];
-  letterArr: string[];
+  textValue: string[] | "";
+  letterArr: string[] | "";
 }
 const TextContainer = ({
   loading,
