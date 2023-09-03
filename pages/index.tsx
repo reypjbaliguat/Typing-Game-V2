@@ -6,7 +6,7 @@ import TextContainer from "./components/TextContainer";
 import TextInput from "./components/TextInput";
 import Result from "./components/Result";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/pages/store";
+import { AppDispatch, RootState } from "@/store";
 import {
   addSecondToTime,
   // fetchWord,
@@ -17,14 +17,15 @@ import {
   setPlaying,
   setValue,
   setWordPerMinute,
-} from "@/pages/store/slices/wordSlice";
+} from "@/store/slices/wordSlice";
 import { useEffect, useRef } from "react";
 import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
-import { useGetWordsQuery } from "./store/slices/word";
-import { useCreateScoreMutation } from "./store/slices/score";
+import { useGetWordsQuery } from "@/store/slices/word";
+import { useCreateScoreMutation } from "@/store/slices/score";
 import { useSession } from "next-auth/react";
+import { enqueueSnackbar } from "notistack";
 
 export default function Home() {
   // wordApi
@@ -67,7 +68,13 @@ export default function Home() {
         .unwrap()
         .then((data) => console.log({ data }))
         .catch((e) => console.log(e));
+    } else {
+      enqueueSnackbar("To store your score please login via gmail/facebook", {
+        variant: "alert",
+        severity: "warning",
+      });
     }
+
     refetch();
   };
 
