@@ -18,7 +18,7 @@ import {
   setValue,
   setWordPerMinute,
 } from "@/pages/store/slices/wordSlice";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
@@ -91,7 +91,7 @@ export default function Home() {
     ) {
       calculateResult();
     }
-  }, [textValue]);
+  }, [textValue, calculateResult, gameOver, letterArr]);
 
   useEffect(() => {
     if (playing) {

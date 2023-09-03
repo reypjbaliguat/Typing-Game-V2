@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useTheme } from "next-themes";
 import {
   mdiFacebook,
@@ -26,7 +26,7 @@ function Navbar() {
   const dispatch = useAppDispatch();
   const [loginViaSocial] = useLoginViaSocialMutation();
 
-  const createOrLoginSocialUser = async () => {
+  const createOrLoginSocialUser = useCallback(async () => {
     const { data } = session;
     const { user } = data;
     const { email, image, name } = user;
@@ -46,13 +46,13 @@ function Navbar() {
     const stringifiedData = JSON.stringify(newData);
     localStorage.setItem("user", stringifiedData);
     dispatch(SET_USER({ user: newData }));
-  };
+  }, [session]);
 
   useEffect(() => {
     if (session.status === "authenticated") {
       createOrLoginSocialUser();
     }
-  }, [session]);
+  }, [session, createOrLoginSocialUser]);
   return (
     <div className="flex basis-full justify-center items-center max-h-[10vh]">
       <IconButton

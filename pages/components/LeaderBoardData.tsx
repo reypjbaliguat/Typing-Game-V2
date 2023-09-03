@@ -28,7 +28,7 @@ export default function LeaderBoardData() {
         scoresData.data.map((item: Score, index: number) => (
           <span key={index} className="text-sm font-bold mb-5">
             {`${index + 1}. `} {item.email} -{" "}
-            <span className="bg-primary dark:bg-darkprimary text-white p-2 rounded-lg">
+            <span className="bg-primary dark:bg-darkprimary text-white p-1 rounded-lg">
               {" "}
               {item.speed}{" "}
             </span>
