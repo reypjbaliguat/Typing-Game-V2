@@ -18,7 +18,7 @@ export default function LeaderBoardData() {
     isFetching: isScoresRefetching,
   } = useGetScoresQuery("");
   if (isScoresLoading || isScoresRefetching) {
-    return <Icon path={mdiLoading} size={5} />;
+    return <Icon path={mdiLoading} size={5} className="animate-spin" />;
   }
 
   return (
