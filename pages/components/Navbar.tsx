@@ -52,7 +52,7 @@ function Navbar() {
     if (session.status === "authenticated") {
       createOrLoginSocialUser();
     }
-  }, [session]);
+  }, [session, createOrLoginSocialUser]);
   return (
     <div className="flex basis-full justify-center items-center max-h-[10vh]">
       <IconButton

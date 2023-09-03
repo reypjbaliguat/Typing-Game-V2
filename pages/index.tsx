@@ -91,7 +91,7 @@ export default function Home() {
     ) {
       calculateResult();
     }
-  }, [textValue]);
+  }, [textValue, calculateResult, gameOver, letterArr]);
 
   useEffect(() => {
     if (playing) {
@@ -107,11 +107,11 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(setValue(""));
-  }, [content]);
+  }, [content, dispatch]);
 
   useEffect(() => {
     dispatch(setContent(data && data.content));
-  }, [data]);
+  }, [data, dispatch]);
   return (
     <main className="flex basis-full justify-center h-screen bg-primarywhite flex-col ">
       <Navbar />
