@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
-import StoreProvider from "./store/StoreProvider";
+import StoreProvider from "../store/StoreProvider";
 import { ThemeProvider } from "next-themes";
 
 // Use of the <SessionProvider> is mandatory to allow components that call
