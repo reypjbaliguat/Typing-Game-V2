@@ -18,7 +18,7 @@ import {
   setValue,
   setWordPerMinute,
 } from "@/pages/store/slices/wordSlice";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
@@ -107,11 +107,11 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(setValue(""));
-  }, [content, dispatch]);
+  }, [content]);
 
   useEffect(() => {
     dispatch(setContent(data && data.content));
-  }, [data, dispatch]);
+  }, [data]);
   return (
     <main className="flex basis-full justify-center h-screen bg-primarywhite flex-col ">
       <Navbar />
