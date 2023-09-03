@@ -1,7 +1,7 @@
 "use client";
 
 import Icon from "@mdi/react";
-import { useGetScoresQuery } from "../store/slices/score";
+import { useGetScoresQuery } from "@/store/slices/score";
 import { mdiLoading } from "@mdi/js";
 
 interface Score {

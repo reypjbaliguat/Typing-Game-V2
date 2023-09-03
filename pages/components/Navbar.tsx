@@ -9,9 +9,9 @@ import {
 import { Button, IconButton } from "@mui/material";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { useLoginViaSocialMutation } from "../store/slices/auth";
-import { SET_USER } from "../store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useLoginViaSocialMutation } from "@/store/slices/auth";
+import { SET_USER } from "@/store/slices/authSlice";
 import { User } from "@/types";
 import Icon from "@mdi/react";
 
