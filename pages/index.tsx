@@ -18,7 +18,7 @@ import {
   setValue,
   setWordPerMinute,
 } from "@/store/slices/wordSlice";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import LeaderBoard from "./components/LeaderBoard";
 
 import Navbar from "./components/Navbar";
@@ -48,7 +48,7 @@ export default function Home() {
   const textValue = value && value.split("");
   const letterArr = content && content.split("");
   // Component Functions
-  const calculateResult = () => {
+  const calculateResult = useCallback(() => {
     let result;
     const averageLetterPerWord = 4.7;
     const wordCount = Number(content && content.length / averageLetterPerWord);
@@ -76,8 +76,16 @@ export default function Home() {
     }
 
     refetch();
-  };
-
+  }, [
+    auth.user.email,
+    auth.user.id,
+    content,
+    createScore,
+    dispatch,
+    refetch,
+    session.status,
+    time,
+  ]);
   const handlePlay = () => {
     dispatch(setPlaying(true));
     dispatch(setGameOver(false));
