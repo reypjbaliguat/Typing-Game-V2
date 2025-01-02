@@ -7,7 +7,7 @@ import { setValue } from "@/store/slices/wordSlice";
 
 interface TextInputProps {
   componentTextValue: string;
-  content: string;
+  content: string[];
   playing: Boolean;
   textAreaRef: any;
 }

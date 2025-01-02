@@ -46,7 +46,8 @@ export default function Home() {
 
   // Component Constants
   const textValue = value && value.split("");
-  const letterArr = content && content.split("");
+  const letterArr = content && content.join(" ").split("");
+
   // Component Functions
   const calculateResult = useCallback(() => {
     let result;
@@ -125,8 +126,9 @@ export default function Home() {
   }, [content]);
 
   useEffect(() => {
-    dispatch(setContent(data && data.content));
+    dispatch(setContent(data));
   }, [data]);
+
   return (
     <main className="flex basis-full justify-center h-screen bg-primarywhite flex-col ">
       <Navbar />

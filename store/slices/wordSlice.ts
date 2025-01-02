@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface word {
-  content: string;
+  content: string[];
   value: string;
   gameOver: Boolean;
   playing: Boolean;
@@ -17,7 +17,7 @@ export interface WordState {
 // Initial state
 const initialState: WordState = {
   word: {
-    content: "",
+    content: [],
     value: "",
     gameOver: false,
     playing: false,

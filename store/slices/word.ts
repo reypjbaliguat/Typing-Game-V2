@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const API_PATH = "https://api.quotable.io/random";
+const API_PATH = "https://random-word-api.herokuapp.com/word?number=30";
 
 // Define a service using a base URL and expected endpoints
 export const wordApi = createApi({
@@ -8,7 +8,7 @@ export const wordApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_PATH }),
   endpoints: (builder) => ({
     getWords: builder.query({
-      query: () => "/",
+      query: () => "",
     }),
   }),
 });
