@@ -1,5 +1,5 @@
-import { api } from "./slices/api";
-import { wordApi } from "./slices/word";
+import { api } from './slices/api';
+import { wordApi } from './slices/word';
 
 const rootMiddleware = [api.middleware, wordApi.middleware];
 

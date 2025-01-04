@@ -1,33 +1,28 @@
-"use client";
-
-import { Dispatch, RefObject, SetStateAction } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
-import { setValue } from "@/store/slices/wordSlice";
+'use client';
 
 interface TextInputProps {
-  componentTextValue: string;
-  content: string[];
-  playing: Boolean;
-  textAreaRef: any;
+    componentTextValue: string;
+    playing: Boolean;
+    textAreaRef: any;
+    handleChangeValue: (val: string) => void;
 }
 
 export default function TextInput({
-  componentTextValue,
-  playing,
-  textAreaRef,
+    componentTextValue,
+    playing,
+    textAreaRef,
+    handleChangeValue,
 }: TextInputProps) {
-  const dispatch = useDispatch<AppDispatch>();
-  return (
-    <textarea
-      ref={textAreaRef}
-      placeholder="Type here ..."
-      className="w-full p-5 rounded-md border-primary border text-black bg-white "
-      value={componentTextValue}
-      disabled={!playing}
-      onChange={(e) => {
-        dispatch(setValue(e.target.value));
-      }}
-    />
-  );
+    return (
+        <textarea
+            ref={textAreaRef}
+            placeholder="Type here ..."
+            className="w-full rounded-md border border-primary bg-white p-5 text-black"
+            value={componentTextValue}
+            disabled={!playing}
+            onChange={(e) => {
+                handleChangeValue(e.target.value);
+            }}
+        />
+    );
 }

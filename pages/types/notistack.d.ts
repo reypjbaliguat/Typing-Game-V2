@@ -1,9 +1,9 @@
-import { AlertColor } from "@mui/material";
+import { AlertColor } from '@mui/material';
 
-declare module "notistack" {
-  interface VariantOverrides {
-    alert: {
-      severity: AlertColor;
-    };
-  }
+declare module 'notistack' {
+    interface VariantOverrides {
+        alert: {
+            severity: AlertColor;
+        };
+    }
 }

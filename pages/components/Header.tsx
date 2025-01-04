@@ -1,11 +1,9 @@
-import Card from "@mui/material/Card";
-
 export default function Header() {
-  return (
-    <div className="flex basis-full justify-center dark:bg-darkprimary bg-primary text-white border rounded-md p-8">
-      <h1 className="text-6xl text-center font-bold text-white ">
-        TYPING GAME
-      </h1>
-    </div>
-  );
+    return (
+        <div className="flex basis-full justify-center rounded-md border bg-primary p-8 text-white dark:bg-darkprimary">
+            <h1 className="text-center text-6xl font-bold text-white">
+                HARD TYPING GAME
+            </h1>
+        </div>
+    );
 }

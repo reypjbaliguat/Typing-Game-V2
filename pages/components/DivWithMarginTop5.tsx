@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface DivWithMarginTop5Props {
     children: React.ReactNode;
@@ -6,5 +6,5 @@ interface DivWithMarginTop5Props {
 export default function DivWithMarginTop5({
     children,
 }: DivWithMarginTop5Props) {
-    return <div className="flex justify-center mt-5">{children}</div>;
+    return <div className="mt-5 flex justify-center">{children}</div>;
 }

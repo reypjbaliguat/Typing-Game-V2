@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 * {
-  user-select: none;
-  font-family: "Roboto", sans-serif;
+    user-select: none;
+    font-family: 'Roboto', sans-serif;
 }

@@ -1,16 +1,16 @@
-import React from "react";
-import LeaderBoardData from "./LeaderBoardData";
+import React from 'react';
+import LeaderBoardData from './LeaderBoardData';
 export default function LeaderBoard() {
-  return (
-    <>
-      <div className="flex basis-full justify-center border rounded-t-md p-8 dark:bg-darkprimary bg-primary text-white">
-        <p className="text-2xl text-center text-cyan-400 text-lightblue-500">
-          Leader Board
-        </p>
-      </div>
-      <div className="flex basis-full justify-center  p-5 border border-gray-200 rounded-b-md border-t-0 h-5/6">
-        <LeaderBoardData />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="flex basis-full justify-center rounded-t-md border bg-primary p-8 text-white dark:bg-darkprimary">
+                <p className="text-cyan-400 text-lightblue-500 text-center text-2xl">
+                    Leader Board
+                </p>
+            </div>
+            <div className="flex h-5/6 basis-full justify-center rounded-b-md border border-t-0 border-gray-200 p-5">
+                <LeaderBoardData />
+            </div>
+        </>
+    );
 }

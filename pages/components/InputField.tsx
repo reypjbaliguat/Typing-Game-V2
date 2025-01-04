@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface InputFieldProps {
     type: string;
@@ -24,7 +24,7 @@ export default function InputField({
             <label
                 htmlFor={name}
                 className={`text-3xl font-bold ${
-                    withMarginTop && "sm:mt-10 mt-5"
+                    withMarginTop && 'mt-5 sm:mt-10'
                 }`}
             >
                 {`${label}:`}
@@ -34,7 +34,7 @@ export default function InputField({
                 name={name}
                 value={value}
                 required={required}
-                className="border rounded border-black p-2"
+                className="rounded border border-black p-2"
                 onChange={handleChange}
             />
         </>
